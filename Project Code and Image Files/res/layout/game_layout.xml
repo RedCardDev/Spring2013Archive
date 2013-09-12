@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/RelLay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill" >
+
+
+        <LinearLayout
+            android:id="@+id/LinLay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical" >
+
+        </LinearLayout>
+
+
+        <HorizontalScrollView
+            android:id="@+id/cardGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true" >
+
+
+            <LinearLayout
+                android:id="@+id/card1gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" >
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+        <LinearLayout
+            android:id="@+id/englargedCardlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true" 
+            android:layout_marginTop="77dp"
+            android:gravity="center|center_vertical|left"
+            android:orientation="horizontal" >
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/PlayCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Play Card" />
+
+        <Button
+            android:id="@+id/DontPlayCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Dont Play Card" />
+        
+        <Button
+            android:id="@+id/DiscardCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/DontPlayCard"
+            android:layout_alignParentTop="true"
+            android:text="Discard Card" />
+        
+        <Button
+            android:id="@+id/SkipTurn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Skip Turn" />
+        
+        
+    </RelativeLayout>

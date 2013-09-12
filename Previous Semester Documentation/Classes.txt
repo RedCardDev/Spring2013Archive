@@ -1,0 +1,72 @@
+CLASSES:
+
+Card:
+    - parent class for each individual card type.
+    - contains mutators for each attribute that the card can modify
+    - contains the reference ID for its image
+    - its child classes use setters to set up their individual attributes
+    - each child's attributes are set according to the card descriptions on the rules sheet
+    - has an attribute that determines whether card can be played on offense or defense
+    
+    Important Members:
+        - double m_rollMultiplier: each individual card type sets its roll multiplier.  The multiplier defaults to 1.
+        - int m_moveAmount: the amount that each card should move the ball.  If the ball requires a dice roll or a defensive card, the amount should be set to zero
+        - int m_gameMode: sets the mode for the game.  Cards that move the card up and down the field and change possession will have a game mode of 1. Shots on goal, and ref cards should change the game mode.
+        - int m_resID: holds the integer value of the card's image.
+
+    Important Methods:
+
+
+Player:
+    - contains 2 Decks: the hand and the full deck of cards
+    - knows current team
+    - knows the card the user selected to play
+
+
+GameController:
+    - controls the logic side of the game
+    - tracks game state
+        - score, possession, game mode, etc.
+    - evaluates the card the player plays, sends updated information to the BoardView
+    - contains Deck of referee cards
+        - all players draw from it
+
+    Important Members:
+        - int: m_possession, m_moveAmount, m_gameMode, m_numRefCards
+            These members are set in order to allow outside classes (i.e. the GameBoardLayout) to access them in order to synchronize them with the board.
+        - int[]: m_roll, m_score
+            These arrays are returned in order to synchronize the dice rolls on the game board, and to synchronize the game score.
+
+    Important Methods:
+        - void evaluateCard(Card)
+            takes a card and sets the controller's members based off of the card's properties.  If the card calls for a dice roll, the controller will roll them and apply whatever card multipliers are necessary.
+
+
+BoardView:
+    - is the layout of the game board
+    - contains the SoccerBall, and updates its position and possessing team
+
+    Important Members:
+        - SoccerBall m_ball: SoccerBall object that is displayed on top of the board
+        - int m_ballPos: current position of the ball.  Synced with the SoccerBall member
+        - int m_currentTeam: current team in posession of the ball (-1 for home, 1 for away).  Used to set the SoccerBall to the correct color
+        - int m_diceImages []: array of resIDs for the dice images.
+
+    Important Methods:
+        - void onDraw(Canvas): draws the board, ball, and dice images.  This is called by the GameBoardLayout's onDraw(Canvas) method.
+        - void moveBall(int): increments the balls position (in pixels) by a number of slots*(pixel differential).  The pixel differential may need to be tweaked in future versions.
+        - void turnover(): switches possession of the ball, and reloads the ball's image with the new resID
+        - void updateDice(int []): uses the array parameter to update the dice images at the top of the screen.  The value of the roll is used to index into the m_diceImages array.
+
+
+GameBoardLayout:
+    - main graphical class
+    - contains BoardView and GameController
+        - syncs them so that the board matches the GameController's state 
+        - contains the Players
+    - displays BoardView, buttons and the current Player's cards
+    - passes the Player's chosen Card to the GameController for evaluation
+
+    Important Members:
+
+    Important Methods:
